@@ -17,5 +17,6 @@ test.afterEach(async () => {
 
 test("Login with Google", async ({page}) => {
   //  await login.loginGoogle(true);
-  await login.loginEmail();
+  //test
+  await login.loginEmail(); 
 });
