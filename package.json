@@ -1,0 +1,19 @@
+{
+  "name": "friendifygpt2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.18.0"
+  }
+}
