@@ -27,4 +27,11 @@ export const config = {
   //Cookies
   cookiesDir: "./Cookies",
   cookieFile: "../Cookies/cookies_friendify.json",
+
+  //assist
+  filePDF: '../Data/fileAudio.mp3',
+  fileAudio: '../Data/fileAudio.mp3',
+  fileImage: '../Data/fileImage.jpg',
+  removeObject: '../Data/fileImage.jpg',
+  removeText: '../Data/removeText.jpg',
 };

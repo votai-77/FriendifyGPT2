@@ -63,16 +63,110 @@ export class Action {
   }
   async summaryPDF() {
     await this.page.getByRole("link", { name: "Assist" }).click();
+
     await this.page
-      .locator("label")
+      .locator(
+        '//*[@id="__next"]/div[1]/div/div/div[3]/div/div/div[2]/label/div'
+      )
       .filter({ hasText: "Upload File (Max 5MB .pdf)" })
-      .locator("div")
-      .nth(1)
+      .first()
       .click();
+
     await this.page
-      .locator("body")
-      .setInputFiles("Tongram requirements 2.3 (1).pdf");
+      .locator('//*[@id="headlessui-dialog-:r2d:"]/div/div[2]')
+      .setInputFiles(config.filePDF);
     await this.page.getByRole("button", { name: "Start Summary" }).click();
     await this.page.waitForTimeout(10000);
+  }
+  async summaryAudio() {
+    await this.page.getByText("Audio").click();
+    await this.page
+      .locator(
+        '//*[@id="__next"]/div[1]/div/div/div[3]/div/div/div[2]/label/div'
+      )
+      .filter({
+        hasText:
+          /^Upload File \(Max 5MB \.mp3\) Small or poor-quality sound may limit summarization\.$/,
+      })
+      .nth(1)
+      .click();
+
+    await this.page
+      .locator('//*[@id="headlessui-dialog-:r2g:"]/div/div[2]/div')
+      .setInputFiles(config.fileAudio);
+    await this.page.getByRole("button", { name: "Start Summary" }).click();
+    await this.page.waitForTimeout(10000);
+  }
+
+  async summaryImage() {
+    await this.page.getByText("Image").click();
+    await page
+      .locator(
+        '//*[@id="__next"]/div[1]/div/div/div[3]/div/div/div[2]/label/div'
+      )
+      .filter({ hasText: "Upload File (Max  5MB .png | .jpg) " })
+      .first()
+      .click();
+    await page
+      .locator(
+        '//*[@id="__next"]/div[1]/div/div/div[3]/div/div/div[2]/label/div'
+      )
+      .setInputFiles(config.fileImage);
+    await page
+      .getByRole("main")
+      .locator("div")
+      .filter({ hasText: /^Summary$/ })
+      .getByRole("button")
+      .click();
+    await page.getByRole("button", { name: "Let's start" }).click();
+    await this.page.waitForTimeout(10000);
+  }
+  async removeObject() {
+    await this.page
+      .locator("label")
+      .filter({ hasText: "Upload File (Max 5MB .png | ." })
+      .locator("div")
+      .first()
+      .click();
+    await this.page.locator("body").setInputFiles(config.removeObject);
+    await this.page
+      .locator("div")
+      .filter({ hasText: /^Remove object$/ })
+      .click();
+    await this.page.getByRole("button", { name: "Let's start" }).click();
+    await this.page.getByRole("slider").fill("44");
+    await this.page
+      .locator("canvas")
+      .nth(1)
+      .click({
+        position: {
+          x: 81,
+          y: 284,
+        },
+      });
+    await this.page.getByRole("button", { name: "Clean •" }).click();
+    await this.page.waitForTimeout(10000);
+  }
+  async removeText() {
+    await this.page
+      .locator("label")
+      .filter({ hasText: "Upload File (Max 5MB .png | ." })
+      .locator("div")
+      .first()
+      .click();
+    await this.page.locator("body").setInputFiles(config.removeText);
+    await this.page
+      .locator("div")
+      .filter({ hasText: /^Remove text$/ })
+      .getByRole("button")
+      .click();
+    await this.page.getByRole("button", { name: "Let's start" }).click();
+    await this.page.waitForTimeout(10000);
+
+  }
+  async logout(){
+    await this.page.getByRole('button', { name: 'avatar' }).click();
+    await this.page.locator('div').filter({ hasText: /^Logout$/ }).nth(1).click();
+    await this.page.getByRole('button', { name: 'Confirm' }).click();
   }
 }
