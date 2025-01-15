@@ -1,7 +1,7 @@
 export const config = {
   // url
   url: 'https://app.friendify.ai/welcome',
-
+  urlLogin: 'https://app.friendify.ai/login',
   // authen
   email: "ssg@gmail.com",
   password: "056839908Tai!@",
